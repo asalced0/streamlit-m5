@@ -1,15 +1,12 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-
-
+import codecs
 
 st.title('Netflix app')
 
 DATE_COLUMN = 'released'
 DATA_URL = ('movies.csv')
-
-import codecs
 
 @st.cache
 def load_data(nrows):
@@ -26,9 +23,6 @@ def filter_data_by_director(director):
     filtered_data_director = data[data['director'] == director]
     return filtered_data_director
 
-
-
-
 data_load_state = st.text('Loading cicle nyc data...')
 data = load_data(1000)
 data_load_state.text("Done! (using st.cache)")
@@ -36,7 +30,6 @@ data_load_state.text("Done! (using st.cache)")
 if st.sidebar.checkbox('Mostrar todos los filmes'):
     st.subheader('Todos los filmes')
     st.write(data)
-
 
 titulofilme = st.sidebar.text_input('Titulo del filme :')
 btnBuscar = st.sidebar.button('Buscar filmes')
@@ -46,8 +39,6 @@ if (btnBuscar):
    count_row = data_filme.shape[0]  # Gives number of rows
    st.write(f"Total filmes mostrados : {count_row}")
    st.write(data_filme)
-
-
 
 selected_director = st.sidebar.selectbox("Seleccionar Director", data['director'].unique())
 btnFilterbyDirector = st.sidebar.button('Filtrar director ')
